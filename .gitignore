@@ -3,14 +3,9 @@
 target/
 .gitignore
 .idea
-.classpath
-.project
-.settings/
+
 
 
 
 .DS_Store
-.idea/inspectionProfiles/
-.idea/workspace.xml
-src/.DS_Store
 src/test/
