@@ -33,6 +33,28 @@ public class Sort {
         System.out.println("each:" + each);
     }
 
+    /**
+     * 希尔排序又名缩减增量排序，插入排序的特殊版本，引入了步长概念，选定初始步长h，按照一定步长缩减序列直到1，对期间每个步长间隔的元素进行插入排序。
+     * 希尔排序步长为1时相当于插入排序，利用插入排序，在有序性更高的情况，效率更高的特性，利用步长较大情况下的前置排序，提高序列有序性，
+     * 使最终步长为1时的插入排序更高
+     * @param a
+     */
+    public static void shell(Comparable[] a){
+        int N = a.length;
+        int gap = 1;
+        while (gap < N/3) gap = 3*gap +1;
+        //步长为1时就相当于插入排序
+        while(gap >= 1){
+            for (int i = gap; i < a.length; i++) {
+                for (int j = i; j >=gap ; j-=gap) {
+                    if(less(a[j],a[j-gap])) exch(a,j,j-gap);
+                    else break;
+                }
+            }
+            gap /=3;
+        }
+    }
+
 
 
     /**
@@ -70,8 +92,8 @@ public class Sort {
     测试代码
      */
     public static void main(String[] args){
-        Integer[] list = {2,3,4,53,3,534,34,4};
-        Sort.insertion(list);
+        Integer[] list = {100,22,3,4,53,3,534,34,4};
+        Sort.shell(list);
         Sort.show(list);
     }
 }
