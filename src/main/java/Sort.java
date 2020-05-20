@@ -22,12 +22,19 @@ public class Sort {
         int each = 0;
         for (int i = 1; i < a.length; i++) {
             Comparable temp = a[i];
-            for (int j = i; j > 0; j--) {
+            int j = i;
+            while (j > 0){
                 count++;
-                if(less(temp,a[j-1])) {a[j] = a[j-1]; each++;}//exch=>a[j] = a[j-1]  减少元素交换次数
-                //减少判断次数
-                else {a[j] = temp;break;}
+                if(less(temp,a[j-1])) {a[j] = a[j-1]; each++;j--;}
+                else break;
             }
+//            for (int j = i; j > 0; j--) {
+//                count++;
+//                if(less(temp,a[j-1])) {a[j] = a[j-1]; each++;}//exch=>a[j] = a[j-1]  减少元素交换次数
+//                //减少判断次数
+//                else break;
+//            }
+            a[j] = temp;
         }
         System.out.println("count:" + count);
         System.out.println("each:" + each);
@@ -47,7 +54,7 @@ public class Sort {
         while(gap >= 1){
             for (int i = gap; i < a.length; i++) {
                 for (int j = i; j >=gap ; j-=gap) {
-                    if(less(a[j],a[j-gap])) exch(a,j,j-gap);
+                    if(less(a[j], a[j - gap])) exch(a,j,j-gap);
                     else break;
                 }
             }
@@ -55,6 +62,13 @@ public class Sort {
         }
     }
 
+    public static void merge(Comparable[] a){
+        Merge.sort(a);
+    }
+
+    public static void quick(Comparable[] a){
+        Quick.sort(a);
+    }
 
 
     /**
@@ -65,14 +79,14 @@ public class Sort {
 
     }
 
-    private static boolean less(Comparable v, Comparable w){
+    public static boolean less(Comparable v, Comparable w){
         return v.compareTo(w) < 0;
     }
 
-    private static void exch(Comparable[] a,int i,int j){
+    public static void exch(Comparable[] a,int i,int j){
         Comparable t = a[i];a[i] = a[j];a[j] = t;
     }
-    private static void show(Comparable[] a){
+    public static void show(Comparable[] a){
         //单行打印数组
         for(int i = 0; i < a.length; i++){
             System.out.println(a[i] + " ");
@@ -92,8 +106,8 @@ public class Sort {
     测试代码
      */
     public static void main(String[] args){
-        Integer[] list = {100,22,3,4,53,3,534,34,4};
-        Sort.shell(list);
+        Integer[] list = {89,100,22,3,4,53,3,534,34,4};
+        Sort.quick(list);
         Sort.show(list);
     }
 }

@@ -7,6 +7,8 @@ public class SortCompare {
         if(alg.equals("insertion")) Sort.insertion(a);
         if(alg.equals("selection")) Sort.selection(a);
         if(alg.equals("shell")) Sort.shell(a);
+        if(alg.equals("merge")) Sort.merge(a);
+
         long endTime=System.currentTimeMillis();
         return endTime - startTime;
     }
