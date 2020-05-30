@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 基于拉链法的散列表，N个键值对存放在M条拉链上，N>M
- * 使用拉链解决碰撞冲突
+ * 使用拉链解决碰撞冲突,拉链使用无序链表符号表
  * @param <K>
  * @param <V>
  */
@@ -30,11 +30,25 @@ public class SeparateChainingHashST<K,V> implements ST<K,V> {
         return (k.hashCode() & 0x7fffffff) % M;
     }
 
+    private void resize(int size){
+        SeparateChainingHashST stb = new SeparateChainingHashST(size);
+        for (int i = 0; i < M; i++) {
+            for(K k: st[i].keys()){
+                stb.put(k,st[i].get(k));
+            }
+
+        }
+        st = stb.st;
+        M = stb.M;
+    }
+
     public  void put(K k, V v){
+        if(N >= 8*M) resize(2*M);
         if(!contains(k)) N++;
         st[hash(k)].put(k,v);
     }
     public  void delete(K k){
+        if(N > 0 && N <= 2*M) resize(M/2);
         if(contains(k))
         {st[hash(k)].delete(k);N--;}
     }
