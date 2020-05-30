@@ -15,7 +15,7 @@ public class FrequencyCounter
     {
         try {
             int minlen = Integer.parseInt(args[0]);
-           ST<String, Integer> st = new SeparateChainingHashST<String, Integer>(97997);
+           ST<String, Integer> st = new LinearProbingHashST<String, Integer>();
             Scanner scan = new Scanner(new FileInputStream(args[1]));
             long startTime=System.currentTimeMillis();
 
@@ -33,7 +33,7 @@ public class FrequencyCounter
             String max = "";
             st.put(max, 0);
             for (String word : st.keys()){
-                //System.out.println("key:value==" + word+":"+st.get(word) );
+              //  System.out.println("key:value==" + word+":"+st.get(word) );
                 if (st.get(word) > st.get(max))
                     max = word;
             }
