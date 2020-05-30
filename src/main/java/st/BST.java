@@ -138,7 +138,7 @@ public class BST<K extends Comparable<K>, V> implements OrderedST<K, V> {
 
     private Node max(Node x) {
         if (x == null || x.right == null) return x;
-        return min(x.right);
+        return max(x.right);
     }
 
     /**
