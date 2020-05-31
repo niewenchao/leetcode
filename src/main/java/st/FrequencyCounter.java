@@ -18,7 +18,6 @@ public class FrequencyCounter
            ST<String, Integer> st = new LinearProbingHashST<String, Integer>();
             Scanner scan = new Scanner(new FileInputStream(args[1]));
             long startTime=System.currentTimeMillis();
-
             while (scan.hasNext()) {
                 String word = scan.next();
                 if (word.length() < minlen) continue;
