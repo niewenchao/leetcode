@@ -5,6 +5,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * 搜索起始点的连通点
+ * 被标记过的即为与起始点连通的点
+ */
 public class Search {
     private boolean[] marked;
     private int count;
