@@ -5,6 +5,12 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.*;
 
+/**
+ * 搜索与起始点的连通路径
+ * dfs：深度优先遍历 路径长
+ * bfs：广度优先遍历 路径最短
+ * edgeTo:vn=vn-1= ...=v1=s
+ */
 public class Paths {
     private boolean[] marked;
     private int[] edgeTo;
@@ -18,7 +24,7 @@ public class Paths {
     }
 
     /*
-     * 深度优先遍历连通顶点
+     * 深度优先遍历连通路径
      * @param G
      * @param v
      */
@@ -33,6 +39,11 @@ public class Paths {
         }
     }
 
+    /**
+     * 广度优先遍历连通路径，为最短路径
+     * @param G
+     * @param s
+     */
     private void bfs(Graph G, int s){
         Queue<Integer> queue = new LinkedList<>();
         queue.add(s);
