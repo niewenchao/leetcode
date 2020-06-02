@@ -50,7 +50,7 @@ public class MaxPQ<T extends Comparable<T>> {
 
     }
 
-    private boolean less(int i, int j){
+    public boolean less(int i, int j){
         if(pq[i].compareTo(pq[j]) == -1) return true;return false;
     }
 
