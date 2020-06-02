@@ -1,12 +1,14 @@
 package graph;
 
+import graph.digraph.Digraph;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.*;
 
 /**
- * 搜索与起始点的连通路径
+ * 搜索与起始点的连通路径 支持无向图 有向图
  * dfs：深度优先遍历 路径长
  * bfs：广度优先遍历 路径最短
  * edgeTo:vn=vn-1= ...=v1=s
@@ -20,7 +22,14 @@ public class Paths {
         marked = new boolean[G.getV()];
         edgeTo = new int[G.getV()];
         this.s = s;
-        dfs(G,s);
+        bfs(G,s);
+    }
+
+    public Paths(Digraph G, int s){
+        marked = new boolean[G.getV()];
+        edgeTo = new int[G.getV()];
+        this.s = s;
+        bfs(G,s);
     }
 
     /*
@@ -45,6 +54,21 @@ public class Paths {
      * @param s
      */
     private void bfs(Graph G, int s){
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(s);
+        while (!queue.isEmpty()){
+            int v = queue.poll();
+            for (int w: G.adj(v)){
+                if(marked[w] == false){
+                    edgeTo[w] = v;
+                    marked[w] = true;
+                    queue.add(w);
+                }
+            }
+        }
+    }
+
+    private void bfs(Digraph G, int s){
         Queue<Integer> queue = new LinkedList<>();
         queue.add(s);
         while (!queue.isEmpty()){
