@@ -1,12 +1,12 @@
 package graph.digraph;
 
 import edu.princeton.cs.algs4.Bag;
+import edu.princeton.cs.algs4.Stack;
 import graph.CC;
 import graph.Graph;
 
 import java.io.FileInputStream;
 import java.util.Scanner;
-import java.util.Stack;
 
 /**
  * 有向图中的强连通性

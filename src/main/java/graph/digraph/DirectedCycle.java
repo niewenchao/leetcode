@@ -1,5 +1,8 @@
 package graph.digraph;
 
+import graph.sp.DirectedEdge;
+import graph.sp.EdgeWeightedDigraph;
+
 import java.util.Stack;
 
 /**
@@ -23,10 +26,41 @@ public class DirectedCycle {
 
     }
 
+    public DirectedCycle(EdgeWeightedDigraph dg){
+        marked = new boolean[dg.getV()];
+        edgeTo = new int[dg.getV()];
+        onStack = new boolean[dg.getV()];
+        for (int i = 0; i < dg.getV(); i++) {
+            if(!marked[i]) dfs(dg,i);
+        }
+
+    }
+
     private void dfs(Digraph G,int v){
         onStack[v] = true;
         marked[v] = true;
         for (int w : G.adj(v)) {
+            if(hasCycle()) return;
+            if(!marked[w])
+            {   edgeTo[w] = v; dfs(G,w);    }
+            else if(onStack[w]){
+                cycle = new Stack<>();
+                for(int x = v; x != w; x = edgeTo[x]){
+                    cycle.push(x);
+                }
+                cycle.push(w);
+                cycle.push(v);
+            }
+
+        }
+        onStack[v] = false;
+    }
+
+    private void dfs(EdgeWeightedDigraph G,int v){
+        onStack[v] = true;
+        marked[v] = true;
+        for (DirectedEdge e : G.adj(v)) {
+            int w = e.to();
             if(hasCycle()) return;
             if(!marked[w])
             {   edgeTo[w] = v; dfs(G,w);    }
